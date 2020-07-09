@@ -1,0 +1,36 @@
+@import "root.css"
+@import "buttons.css"
+
+.root {
+    -fx-font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-bar {
+    -fx-font-size: 18px;
+    -fx-padding: 0;
+}
+
+.menu-item {
+    -fx-font-size: 18px;
+}
+
+.label--message {
+    -fx-font-size: 1.6em;
+    -fx-wrap-text: true;
+}
+
+.footer {
+    -fx-padding: 20px 0;
+    -fx-alignment: center;
+}
+
+.footer__button {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 1.4em;
+}
+
+.footer__mode_error {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: red;
+}

@@ -1,0 +1,23 @@
+.message-dialog {
+    -fx-pref-width: 500px;
+    -fx-pref-height: 300px;
+}
+
+.message-dialog__message-area {
+    -fx-padding: 20px;
+}
+
+.message-dialog__message {
+    -fx-font-size: 1.4em;
+    -fx-wrap-text: true;
+    -fx-text-alignment: justify;
+}
+
+.message-dialog__button-area {
+    -fx-padding: 20px;
+}
+
+.message-dialog__ok {
+    -fx-pref-width: 70px;
+    -fx-font-size: 1.4em;
+}

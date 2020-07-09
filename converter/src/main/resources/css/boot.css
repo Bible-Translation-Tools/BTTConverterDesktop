@@ -1,0 +1,8 @@
+.boot {
+    -fx-pref-width: 800px;
+    -fx-pref-height: 600px;
+}
+
+.boot__content {
+    -fx-alignment: center;
+}
