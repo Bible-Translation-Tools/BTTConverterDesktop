@@ -1,4 +1,4 @@
-package bible.translationtools.desktop.converter.assets
+package bible.translationtools.desktop.assets
 
 import java.net.URL
 

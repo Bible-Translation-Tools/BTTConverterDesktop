@@ -2,9 +2,13 @@ package bible.translationtools.desktop.converter.ui.projectitem
 
 import bible.translationtools.desktop.common.data.ProjectData
 import bible.translationtools.desktop.common.onChangeAndDoNow
-import bible.translationtools.desktop.converter.assets.AppResources
+import bible.translationtools.desktop.assets.AppResources
 import com.jfoenix.controls.JFXButton
 import com.jfoenix.controls.JFXRadioButton
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
 import javafx.scene.control.ToggleGroup
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
@@ -13,17 +17,30 @@ import tornadofx.FX.Companion.messages
 
 class ProjectItem(project: ProjectData) : HBox() {
 
+    private val onEditActionProperty = SimpleObjectProperty<EventHandler<ActionEvent>>()
+
     init {
         importStylesheet(AppResources.load("/css/project-item.css").toExternalForm())
         addClass("project-item")
 
         label(project.toString()).apply {
-            project.pendingProperty.onChangeAndDoNow {
+            project.shouldUpdateProperty.onChangeAndDoNow {
                 it?.let {
                     if (it) {
                         addClass("project-item__title--pending")
+                        removeClass("project-item__title--error")
                     } else {
                         removeClass("project-item__title--pending")
+                    }
+                }
+            }
+
+            project.shouldFixProperty.onChangeAndDoNow {
+                it?.let {
+                    if (it) {
+                        addClass("project-item__title--error")
+                    } else {
+                        removeClass("project-item__title--error")
                     }
                 }
             }
@@ -54,7 +71,7 @@ class ProjectItem(project: ProjectData) : HBox() {
                     selectedProperty().onChange {
                         if (it) {
                             project.modeProperty.set("verse")
-                            project.pendingProperty.set(true)
+                            project.shouldUpdateProperty.set(true)
                         }
                     }
                 }
@@ -76,7 +93,7 @@ class ProjectItem(project: ProjectData) : HBox() {
                     selectedProperty().onChange {
                         if (it) {
                             project.modeProperty.set("chunk")
-                            project.pendingProperty.set(true)
+                            project.shouldUpdateProperty.set(true)
                         }
                     }
                 }
@@ -85,14 +102,27 @@ class ProjectItem(project: ProjectData) : HBox() {
 
         region {
             hgrow = Priority.ALWAYS
-            maxWidth = 10.0
+            addClass("project-item__spacer")
         }
 
         add(
             JFXButton(messages["edit"].toUpperCase()).apply {
                 addClass("btn", "btn--secondary", "project-item__edit-button")
+                onActionProperty().bind(onEditActionProperty())
+
+                disableProperty().bind(project.shouldFixProperty)
+
+
             }
         )
+    }
+
+    fun onEditAction(op: () -> Unit) {
+        onEditActionProperty.set(EventHandler { op.invoke() })
+    }
+
+    fun onEditActionProperty(): ObjectProperty<EventHandler<ActionEvent>> {
+        return onEditActionProperty
     }
 }
 

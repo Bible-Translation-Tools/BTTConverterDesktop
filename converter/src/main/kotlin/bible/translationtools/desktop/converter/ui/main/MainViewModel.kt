@@ -6,6 +6,7 @@ import bible.translationtools.desktop.converter.ui.mainmenu.MainMenuViewModel
 import bible.translationtools.desktop.common.data.ProjectData
 import bible.translationtools.desktop.common.mappers.ProjectDataMapper
 import bible.translationtools.desktop.common.mappers.ProjectMapper
+import bible.translationtools.desktop.converter.ui.projectdetails.ProjectEditorView
 import com.github.thomasnield.rxkotlinfx.observeOnFx
 import com.sun.javafx.collections.ObservableListWrapper
 import io.reactivex.Completable
@@ -41,11 +42,15 @@ class MainViewModel : ViewModel() {
 
     fun analyze() {
         isProcessingProperty.set(true)
+        mainMenuViewModel.disableSetRootDirectoryProperty.set(true)
+        converter.projects.clear()
+        projects.clear()
         analyzeProjects()
             .subscribeOn(Schedulers.io())
             .observeOnFx()
             .subscribe {
                 isProcessingProperty.set(false)
+                mainMenuViewModel.disableSetRootDirectoryProperty.set(false)
                 projects.setAll(
                     converter.projects.map {
                         ProjectDataMapper().mapFrom(it)
@@ -63,6 +68,7 @@ class MainViewModel : ViewModel() {
     fun convert() {
         if (!hasEmptyModes()) {
             isProcessingProperty.set(true)
+            mainMenuViewModel.disableSetRootDirectoryProperty.set(true)
             convertProjects()
                 .subscribeOn(Schedulers.io())
                 .observeOnFx()
@@ -78,6 +84,7 @@ class MainViewModel : ViewModel() {
                     projects.clear()
                     converter.projects.clear()
                     isProcessingProperty.set(false)
+                    mainMenuViewModel.disableSetRootDirectoryProperty.set(false)
                 }
         } else {
             messageDialogTextProperty.set(messages["modeErrorMessage"])
@@ -97,14 +104,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun openEditor(project: ProjectData) {
+        workspace.dock(ProjectEditorView(project))
+    }
+
     private fun hasEmptyModes(): Boolean {
         return projects.any {
             it.modeProperty.value.isNullOrEmpty()
         }
     }
-
-    fun openProjectDetails() {
-        // workspace.dock<ProjectDetailsView>()
-    }
-
 }

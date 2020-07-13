@@ -7,10 +7,11 @@ class ProjectMapper : Mapper<ProjectData, Project>() {
     override fun mapFrom(from: ProjectData): Project {
         return Project(
             from.modeProperty.value,
-            from.languageProperty.value,
-            from.versionProperty.value,
+            from.languageProperty.value.slug,
+            from.versionProperty.value.slug,
             from.bookProperty.value,
-            from.pendingProperty.value
+            from.shouldFixProperty.value,
+            from.shouldUpdateProperty.value
         )
     }
 }

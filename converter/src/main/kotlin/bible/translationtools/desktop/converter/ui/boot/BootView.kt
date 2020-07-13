@@ -1,6 +1,6 @@
 package bible.translationtools.desktop.converter.ui.boot
 
-import bible.translationtools.desktop.converter.assets.AppResources
+import bible.translationtools.desktop.assets.AppResources
 import bible.translationtools.desktop.converter.ui.mainmenu.MainMenu
 import javafx.scene.layout.Priority
 import tornadofx.*

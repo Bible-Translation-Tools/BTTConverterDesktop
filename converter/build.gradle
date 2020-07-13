@@ -41,7 +41,7 @@ dependencies {
     implementation 'commons-beanutils:commons-beanutils:1.9.3'
 
     // Converter
-    implementation "com.github.Bible-Translation-Tools:BTTConverter:0.5.2"
+    implementation "com.github.Bible-Translation-Tools:BTTConverter:0.6.2"
 
     // ReactiveX
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"

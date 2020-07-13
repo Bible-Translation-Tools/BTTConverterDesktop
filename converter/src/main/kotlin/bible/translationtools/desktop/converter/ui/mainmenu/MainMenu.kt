@@ -1,5 +1,6 @@
 package bible.translationtools.desktop.converter.ui.mainmenu
 
+import bible.translationtools.desktop.assets.AppResources
 import javafx.scene.control.Menu
 import javafx.scene.control.MenuBar
 import javafx.scene.control.MenuItem
@@ -20,6 +21,8 @@ class MainMenu : MenuBar() {
     }
 
     init {
+        importStylesheet(AppResources.load("/css/menu.css").toExternalForm())
+
         with(this) {
             menu(messages["file"]) {
                 setRootMenuItem(messages["setRootDirectory"])

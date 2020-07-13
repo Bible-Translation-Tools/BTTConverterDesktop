@@ -1,5 +1,6 @@
 package bible.translationtools.desktop.converter.ui.main
 
+import bible.translationtools.desktop.assets.AppResources
 import bible.translationtools.desktop.converter.ui.messagedialog.messagedialog
 import bible.translationtools.desktop.converter.ui.projectitem.projectitem
 import com.jfoenix.controls.JFXButton
@@ -16,12 +17,12 @@ class MainView : View() {
 
     init {
         title = messages["appName"]
+        importStylesheet(AppResources.load("/css/main.css").toExternalForm())
         initializeMessageDialog()
     }
 
     override val root = vbox {
-        prefWidth = 800.0
-        prefHeight = 600.0
+        addClass("main")
 
         alignment = Pos.CENTER
 
@@ -33,25 +34,33 @@ class MainView : View() {
             hgrow = Priority.ALWAYS
 
             cellFormat {
-                graphic = projectitem(it)
+                graphic = projectitem(item).apply {
+                    onEditAction {
+                        mainViewModel.openEditor(item)
+                    }
+                }
             }
         }
 
-        vbox {
-            addClass("footer")
+        hbox {
+            addClass("main__mode_error")
 
             label(messages["modeErrorMessage"]).apply {
-                addClass("footer__mode_error")
                 visibleWhen(errorMessageShowBinding())
+                managedWhen(visibleProperty())
             }
+        }
 
-            region {
-                prefHeight  = 20.0
-            }
+        region {
+            prefHeight  = 20.0
+        }
+
+        hbox {
+            addClass("main__footer")
 
             add(
                 JFXButton().apply {
-                    addClass("btn", "btn--primary", "footer__button")
+                    addClass("btn", "btn--primary", "main__footer-button")
 
                     textProperty().bind(convertTextBinding())
 
@@ -67,7 +76,7 @@ class MainView : View() {
 
             add(
                 JFXButton(messages["analyze"].toUpperCase()).apply {
-                    addClass("btn", "btn--primary", "footer__button")
+                    addClass("btn", "btn--primary", "main__footer-button")
 
                     textProperty().bind(analyzeTextBinding())
 
@@ -132,5 +141,9 @@ class MainView : View() {
             },
             mainViewModel.projectsProperty
         )
+    }
+
+    override fun onDock() {
+        mainViewModel.analyze()
     }
 }

@@ -1,6 +1,6 @@
 package bible.translationtools.desktop.converter.ui.mainmenu
 
-import bible.translationtools.desktop.converter.assets.Properties
+import bible.translationtools.desktop.assets.Properties
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*

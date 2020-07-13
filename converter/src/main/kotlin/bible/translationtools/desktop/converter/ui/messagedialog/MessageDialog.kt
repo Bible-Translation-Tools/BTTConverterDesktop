@@ -1,7 +1,7 @@
 package bible.translationtools.desktop.converter.ui.messagedialog
 
 import bible.translationtools.desktop.common.onChangeAndDoNow
-import bible.translationtools.desktop.converter.assets.AppResources
+import bible.translationtools.desktop.assets.AppResources
 import com.jfoenix.controls.JFXButton
 import javafx.application.Platform
 import javafx.beans.property.*

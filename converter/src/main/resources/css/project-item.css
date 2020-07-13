@@ -11,6 +11,11 @@
     -fx-font-weight: bold;
 }
 
+.project-item__title--error {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
 .project-item__radio-group {
     -fx-border-width: 0 1px 0 0;
     -fx-border-color: #ccc;
@@ -28,4 +33,8 @@
 
 .project-item__radio-button--error {
     -fx-text-fill: red;
+}
+
+.project-item__spacer {
+    -fx-max-width: 10px;
 }
