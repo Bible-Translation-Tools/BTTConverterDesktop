@@ -8,7 +8,6 @@ import org.kordamp.ikonli.javafx.FontIcon
 import tornadofx.*
 import tornadofx.FX.Companion.messages
 
-
 class MainMenu : MenuBar() {
 
     private val viewModel: MainMenuViewModel = find()

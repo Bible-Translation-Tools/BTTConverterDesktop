@@ -38,4 +38,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 config.properties
+local.properties
 

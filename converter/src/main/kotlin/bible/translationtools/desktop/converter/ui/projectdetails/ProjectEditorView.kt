@@ -24,7 +24,6 @@ import tornadofx.*
 import java.text.MessageFormat
 import java.util.concurrent.Callable
 
-
 class ProjectEditorView(project: ProjectData) : View() {
 
     private val viewModel: ProjectEditorViewModel by inject()

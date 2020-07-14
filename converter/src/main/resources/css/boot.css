@@ -6,3 +6,7 @@
 .boot__content {
     -fx-alignment: center;
 }
+
+.label--message {
+    -fx-font-size: 1.8em;
+}

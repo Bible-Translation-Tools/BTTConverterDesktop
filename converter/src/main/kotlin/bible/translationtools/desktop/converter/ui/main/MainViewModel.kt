@@ -8,7 +8,6 @@ import bible.translationtools.desktop.common.mappers.ProjectDataMapper
 import bible.translationtools.desktop.common.mappers.ProjectMapper
 import bible.translationtools.desktop.converter.ui.projectdetails.ProjectEditorView
 import com.github.thomasnield.rxkotlinfx.observeOnFx
-import com.sun.javafx.collections.ObservableListWrapper
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +25,7 @@ class MainViewModel : ViewModel() {
     val showMessageDialogProperty = SimpleBooleanProperty(false)
     val messageDialogTextProperty = SimpleStringProperty()
 
-    val projects = ObservableListWrapper<ProjectData>(mutableListOf())
+    val projects = observableListOf<ProjectData>()
     val projectsProperty = SimpleListProperty<ProjectData>(projects)
 
     private lateinit var converter: Converter

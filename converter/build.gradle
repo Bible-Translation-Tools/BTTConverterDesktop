@@ -5,14 +5,17 @@ plugins {
 
 apply plugin: 'application'
 apply plugin: 'idea'
+apply plugin: 'edu.sc.seis.launch4j'
 
 javafx {
     version = '11'
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls']
 }
 
+version = 1.0
+
 repositories {
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } // TornadoFX 2.0 Snapshot
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://jitpack.io' }
 }
 
@@ -53,7 +56,7 @@ dependencies {
 
 // tell gradle what to put in the jar
 shadowJar {
-    archiveFileName = 'BTTConverter.jar'
+    archiveFileName = "${rootProject.name}.jar"
     mergeServiceFiles()
     manifest {
         attributes(
@@ -61,3 +64,24 @@ shadowJar {
         )
     }
 }
+
+task copyJre(type: Copy) {
+    if (project.hasProperty("jrePath")) {
+        from jrePath
+        into "${buildDir}/launch4j/jre"
+    }
+}
+
+launch4j {
+    outfile = "${rootProject.name}.exe"
+    mainClassName = project.mainClassName
+    bundledJrePath = "jre"
+    bundledJre64Bit = true
+    jdkPreference = 'jdkOnly'
+    icon = "${projectDir}/launcher.ico"
+    jar = "${buildDir}/libs/${rootProject.name}.jar"
+    productName = rootProject.name
+}
+
+project.tasks.createExe.dependsOn copyJre
+project.tasks.createExe.dependsOn shadowJar
