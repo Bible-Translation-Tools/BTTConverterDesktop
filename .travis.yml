@@ -1,0 +1,21 @@
+language: java
+dist: bionic
+jdk:
+- openjdk11
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -f $HOME/.gradle/caches/*/plugin-resoloution/
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper"
+script:
+- ./gradlew shadowJar
+- URL=$(curl 'https://api.github.com/repos/WycliffeAssociates/Jar2AppImage/releases?per_page=1' | jq -r '.[] | .zipball_url')
+- curl -L $URL --output jar2app.zip
+- unzip -j jar2app.zip -d jar2app
+- cp converter/build/libs/BTTConverterDesktop.jar ./jar2app/BTTConverterDesktop.jar
+- cp jar2appvars.env ./jar2app/vars.env
+- cd jar2app && ./build.sh && cd ..
+- export JREPATH="./jar2app/jre"
+- ./gradlew -PjrePath=$JREPATH createExe
