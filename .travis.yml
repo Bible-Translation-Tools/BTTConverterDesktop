@@ -19,11 +19,17 @@ script:
 - cd jar2app && ./build.sh && cd ..
 - export JREPATH="./jar2app/jre"
 - ./gradlew -PjrePath=$JREPATH createExe
+- JARFILE=$(find ./Jar2AppImage -name 'Jar*.AppImage'  | tr -t "\n" "")
+- EXEFILE=$(find ./converter -name '*.exe'  | tr -t "\n" "")
+- mkdir out
+- cp $JARFILE ./out
+- cp $EXEFILE ./out
 addons:
   artifacts:
     s3_region: us-east-1
+    working_dir: out
     target_paths:
     - "/${TRAVIS_REPO_SLUG}/${TRAVIS_BRANCH}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_TAG}"
     paths:
-    - $(find ./jar2app -name '*.AppImage'  | tr "\n" ":")
-    - $(find ./converter -name '*.exe'  | tr "\n" ":")
+    - $(find . -name '*.AppImage'  | tr "\n" ":")
+    - $(find . -name '*.exe'  | tr "\n" ":")
