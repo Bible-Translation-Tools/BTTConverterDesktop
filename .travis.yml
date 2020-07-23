@@ -38,8 +38,11 @@ deploy:
   provider: releases
   api_key:
     secure: k68TZxWskLbOGdKD2z1HdO0ScnKQKsxK3e00098FoM14AEvBWPFR0iRWztsRpZvQHeui/7NUsMuq+e+9zcW8FJR3eCU735Bjy8lZw4GW4tvrTVNhqoFwk8PhU1NprR/bG1PP6EpaCg1uaWP9SeMPfHvHt1Heq0FfR5OaUUblJG0siA1HSiGdhX7oW33AtPXfuMo898Ih0lXefLeg2N82cAca9pEifiWNcT6NhAXk8uQiyKnlAucE2TU/v1k9PkGwPNOhT21P3nzCQE1ONZ+IEIx3RspbfENG9gcMsGZPDcEQXzhBG7QbXWG97ItAFCOeEopKXQg/5uEiE0QXnuutKqr2iTAb2OMeA7bD1DcFMCupuHpJeA8EkjDOM3Qr2hoVURlQlWGC9X1Q0EqKKsrXB3tYVWOLHshd26X1vrFKU6u2StgKu1C7dgFE95BTFGkOM8n1w/HMPkwO8vfophu4hqhqI0lUrwUBVqs2zWiTCI7vJBa9CD6/9F5Up+OcHQVVpyQUbaUnaj0ObWF794JbUJTiowvwIZtCGR/Q6a5pf4F+UR1Qxqa5YR/HydZ5BWDcW9Cky/Zjc5SLPmKq70/t3VHU9179S78bAf64CvqS6/rJmDUKZo3ve3l5Lw/PT4TLfplWS12DxL6rvKPl8Tvce657SH+459ITY/eJctHTJvg=
-  file: "./out/*.exe"
+  file: 
+  - $(find . -name '*.AppImage'  | tr "\n" ":")
+  - $(find . -name '*.exe'  | tr "\n" ":")
   on:
     repo: Bible-Translation-Tools/BTTConverterDesktop
-    branch: dan-build
+    branch: master
+    tags: true
   skip_cleanup: 'true'
