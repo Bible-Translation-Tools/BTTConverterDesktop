@@ -1,0 +1,48 @@
+@import "root.css"
+
+.btn {
+    -fx-pref-height: 40px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-style: solid;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+
+/* Primary Button */
+.btn--primary {
+    -fx-background-color: -primary;
+    -fx-effect: -shadow2;
+    -fx-text-fill: -white;
+    -fx-border-width: 0px;
+}
+
+.btn--primary:hover {
+    -fx-background-color: -primary-dark;
+    -fx-effect: -shadow1;
+}
+
+.btn--primary:disabled {
+    -fx-background-color: -gray-lighter;
+    -fx-text-fill: -gray-dark;
+    -fx-effect: -shadow0;
+    -fx-cursor: disappear;
+}
+
+/* Secondary Button */
+.btn--secondary {
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-color: -primary;
+    -fx-text-fill: -primary;
+}
+.btn--secondary:hover {
+    -fx-background-color: -primary-light;
+    -fx-text-fill: -primary-dark;
+}
+.btn--secondary:disabled {
+    -fx-cursor: disappear;
+    -fx-text-fill: -gray;
+    -fx-border-color: -gray-light;
+    -fx-border-width: 2px;
+}

@@ -1,0 +1,21 @@
+.root {
+    -fx-font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    -primary: #015AD9;
+    -primary-light: #CEE6FF;
+    -primary-dark: #00377C;
+
+    -gray-darker: rgba(26,26,26,1);
+    -gray-dark: rgba(26,26,26,0.8);
+    -gray: rgba(26,26,26,0.6);
+    -gray-light: rgba(26,26,26,0.4);
+    -gray-lighter: rgba(26,26,26,0.1);
+
+    -white: #FFF;
+
+    -shadow0: dropshadow(gaussian, rgba(0, 0, 0, 0.0), 0, 0, 0, 0);
+    -shadow1: dropshadow(gaussian, rgba(0, 0, 0, 0.24), 2, 0, 0, 1);
+    -shadow2: dropshadow(gaussian, rgba(0,0,0,0.23), 6, 0, 0, 3);
+}

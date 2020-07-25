@@ -1,0 +1,87 @@
+plugins {
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'edu.sc.seis.launch4j'
+
+javafx {
+    version = '11'
+    modules = ['javafx.controls']
+}
+
+version = 1.0
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'https://jitpack.io' }
+}
+
+application {
+    mainClassName = "bible.translationtools.desktop.converter.MainKt"
+}
+
+dependencies {
+    // TornadoFX
+    implementation "no.tornado:tornadofx:2.0.0-SNAPSHOT"
+
+    // JFoenix
+    implementation "com.jfoenix:jfoenix:9.0.8"
+
+    // OpenJFX cross-platform fat jar dependencies
+    runtimeOnly "org.openjfx:javafx-graphics:11:win"
+    runtimeOnly "org.openjfx:javafx-graphics:11:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:11:mac"
+
+    // Ikonli
+    implementation "org.kordamp.ikonli:ikonli-javafx:11.3.4"
+    implementation "org.kordamp.ikonli:ikonli-material-pack:11.3.4"
+
+    // Config
+    implementation 'org.apache.commons:commons-configuration2:2.6'
+    implementation 'commons-beanutils:commons-beanutils:1.9.3'
+
+    // Converter
+    implementation "com.github.Bible-Translation-Tools:BTTConverter:0.6.2"
+
+    // ReactiveX
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+    implementation "com.github.thomasnield:rxkotlinfx:2.2.2"
+
+    // Testing
+    testImplementation "junit:junit:4.12"
+}
+
+// tell gradle what to put in the jar
+shadowJar {
+    archiveFileName = "${rootProject.name}.jar"
+    mergeServiceFiles()
+    manifest {
+        attributes(
+                'Main-Class': "bible.translationtools.desktop.converter.MainKt"
+        )
+    }
+}
+
+task copyJre(type: Copy) {
+    if (project.hasProperty("jrePath")) {
+        from jrePath
+        into "${buildDir}/launch4j/jre"
+    }
+}
+
+launch4j {
+    outfile = "${rootProject.name}.exe"
+    mainClassName = project.mainClassName
+    bundledJrePath = "jre"
+    bundledJre64Bit = true
+    jdkPreference = 'jdkOnly'
+    icon = "${projectDir}/launcher.ico"
+    jar = "${buildDir}/libs/${rootProject.name}.jar"
+    productName = rootProject.name
+}
+
+project.tasks.createExe.dependsOn copyJre
+project.tasks.createExe.dependsOn shadowJar

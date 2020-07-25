@@ -1,0 +1,33 @@
+@import "root.css"
+@import "buttons.css"
+
+.main {
+    -fx-pref-width: 800px;
+    -fx-pref-height: 600px;
+}
+
+.main__label--message {
+    -fx-font-size: 1.6em;
+    -fx-wrap-text: true;
+}
+
+.main__footer {
+    -fx-padding: 20px 0;
+    -fx-alignment: center;
+}
+
+.main__footer-button {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 1.4em;
+}
+
+.main__mode_error {
+    -fx-alignment: center;
+    -fx-padding: 10px 0 0 0;
+}
+
+.main__mode_error .label {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: red;
+}

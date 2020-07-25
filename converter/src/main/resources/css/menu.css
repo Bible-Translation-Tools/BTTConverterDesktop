@@ -1,0 +1,8 @@
+.menu-bar {
+    -fx-font-size: 18px;
+    -fx-padding: 0;
+}
+
+.menu-item {
+    -fx-font-size: 18px;
+}

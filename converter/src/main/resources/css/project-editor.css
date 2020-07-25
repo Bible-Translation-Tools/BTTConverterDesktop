@@ -1,0 +1,58 @@
+.project-editor {
+
+}
+
+.project-editor__h-spacer {
+    -fx-max-width: 40px;
+}
+
+.project-editor__v-spacer {
+    -fx-max-height: 40px;
+}
+
+.project-editor__header {
+    -fx-padding: 20px;
+}
+
+.project-editor__back-button {
+    -jfx-disable-visual-focus: true;
+}
+
+.project-editor__back-button .ikonli-font-icon {
+    -fx-icon-size: 22px;
+    -fx-fill: -primary;
+}
+
+.project-editor__title {
+    -fx-alignment: center;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
+}
+
+.project-editor__body {
+    -fx-padding: 50px 20px;
+}
+
+.project-editor__footer {
+    -fx-padding: 20px 0;
+    -fx-alignment: center;
+}
+
+.project-editor__footer-button {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 1.4em;
+}
+
+.project-editor__drop-list {
+    -fx-max-width: infinity;
+    -fx-font-size: 1.4em;
+}
+
+.project-editor__drop-list .list-view {
+    -fx-max-height: 300px;
+}
+
+.project-editor__transform-all {
+   -fx-font-size: 1.4em;
+}
