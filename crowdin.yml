@@ -1,0 +1,3 @@
+files:
+  - source: converter/src/main/resources/Messages_en.properties
+    translation: converter/src/main/resources/Messages_%two_letters_code%.properties
