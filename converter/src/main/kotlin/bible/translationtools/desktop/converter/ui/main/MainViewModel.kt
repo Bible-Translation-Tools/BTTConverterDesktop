@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
+import java.io.File
 import java.text.MessageFormat
 
 class MainViewModel : ViewModel() {
@@ -33,13 +34,17 @@ class MainViewModel : ViewModel() {
     init {
         mainMenuViewModel.rootDirectoryProperty.onChangeAndDoNow {
             it?.let {
-                converter = Converter(it)
-                analyze()
+                if (File(it).exists()) {
+                    converter = Converter(it)
+                    analyze()
+                }
             }
         }
     }
 
     fun analyze() {
+        if (!this::converter.isInitialized) return
+
         isProcessingProperty.set(true)
         mainMenuViewModel.disableSetRootDirectoryProperty.set(true)
         converter.projects.clear()
